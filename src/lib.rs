@@ -144,11 +144,7 @@ where
     fn emit_str(&mut self, key: Key, val: &str) -> slog::Result {
         impl_m!(self, key, &val)
     }
-    fn emit_arguments(
-        &mut self,
-        key: Key,
-        val: &fmt::Arguments,
-    ) -> slog::Result {
+    fn emit_arguments(&mut self, key: Key, val: &fmt::Arguments) -> slog::Result {
         TL_BUF.with(|buf| {
             let mut buf = buf.borrow_mut();
 
@@ -161,11 +157,7 @@ where
     }
 
     #[cfg(feature = "nested-values")]
-    fn emit_serde(
-        &mut self,
-        key: Key,
-        value: &dyn slog::SerdeValue,
-    ) -> slog::Result {
+    fn emit_serde(&mut self, key: Key, value: &dyn slog::SerdeValue) -> slog::Result {
         impl_m!(self, key, value.as_serde())
     }
 }
@@ -232,11 +224,7 @@ where
 {
     type Ok = ();
     type Err = io::Error;
-    fn log(
-        &self,
-        rinfo: &Record,
-        logger_values: &OwnedKVList,
-    ) -> io::Result<()> {
+    fn log(&self, rinfo: &Record, logger_values: &OwnedKVList) -> io::Result<()> {
         OUT_BUF.with(|out_buf| {
             let mut io = out_buf.borrow_mut();
             io.clear();
