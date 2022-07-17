@@ -34,6 +34,7 @@ where
 }
 
 fn main() {
+    println!("Usage: bench [iterations] [num_cpus]");
     let mut args = std::env::args().skip(1);
     let iters = args
         .next()
@@ -43,6 +44,8 @@ fn main() {
         .next()
         .map(|x| x.parse().expect("Expected CPU's number"))
         .unwrap_or(num_cpus::get());
+
+    println!("Run tests for iters={} and cpus={}", iters, cpus);
 
     run_bench(
         "slog-json-concur",
