@@ -9,7 +9,7 @@ fn run_bench<D>(name: &str, drain: D, iters: u64, cpus: usize)
 where
     D: Drain + 'static + UnwindSafe + SendSyncRefUnwindSafeDrain<Err = Never, Ok = ()>,
 {
-    println!("Started {}", name);
+    println!("Starting {}", name);
     let logger = Logger::root(drain, slog::o!());
     let mut join_handles = vec![];
     let logger = Arc::new(logger);
@@ -26,7 +26,7 @@ where
     join_handles.drain(..).for_each(|h| h.join().unwrap());
     let dur = now.elapsed().as_secs_f64();
     println!(
-        "Time for {}: time = {}s, ns/iter = {}",
+        "Result for {}: time = {}s, ns/iter = {}",
         name,
         dur,
         1e9 * dur / ((iters * (cpus as u64)) as f64)
@@ -45,7 +45,7 @@ fn main() {
         .unwrap_or(num_cpus::get());
 
     run_bench(
-        "slog_json_concur",
+        "slog-json-concur",
         slog_json_concur::Json::new(sink())
             .add_default_keys()
             .build()
@@ -54,7 +54,7 @@ fn main() {
         cpus,
     );
     run_bench(
-        "slog_json",
+        "slog-json",
         Mutex::new(slog_json::Json::new(sink()).add_default_keys().build()).fuse(),
         iters,
         cpus,
