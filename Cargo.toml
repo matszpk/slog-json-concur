@@ -32,7 +32,6 @@ erased-serde = {version = "0.3", optional = true }
 time = { version = "0.3.6", features = ["formatting"] }
 
 [dev-dependencies]
-slog-async = "2"
 num_cpus = "1"
 slog-json = "2.6.1"
 

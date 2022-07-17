@@ -1,5 +1,5 @@
 // {{{ Crate docs
-//! JSON `Drain` for `slog-rs`
+//! JSON `Drain` for `slog-rs` - with concurrency
 //!
 //! ```
 //! #[macro_use]
