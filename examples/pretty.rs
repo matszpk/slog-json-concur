@@ -4,7 +4,7 @@ extern crate slog_json_concur;
 
 use slog::Drain;
 
-// An original version uses slog-async to synchronize drain.
+// The original version uses slog-async to synchronize drain.
 // This version does not require that.
 
 fn main() {
