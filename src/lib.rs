@@ -242,7 +242,10 @@ where
                 io.write_all("\n".as_bytes())?;
             }
 
-            let mut w = self.io.lock().unwrap();
+            let mut w = self
+                .io
+                .lock()
+                .map_err(|e| io::Error::new(io::ErrorKind::Interrupted, e.to_string()))?;
             w.write_all(&io)?;
             if self.flush {
                 w.flush()?;
