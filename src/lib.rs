@@ -243,7 +243,7 @@ where
             }
 
             let mut w = self.io.lock().unwrap();
-            w.write(&io)?;
+            w.write_all(&io)?;
             if self.flush {
                 w.flush()?;
             }
