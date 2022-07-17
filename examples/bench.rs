@@ -38,7 +38,7 @@ fn main() {
     let iters = args
         .next()
         .map(|x| x.parse().expect("Expected iterations number"))
-        .unwrap_or(10000000);
+        .unwrap_or(1000000);
     let cpus = args
         .next()
         .map(|x| x.parse().expect("Expected CPU's number"))
